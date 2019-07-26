@@ -1,0 +1,56 @@
+@font-face {
+	font-family: pingfang-medium;
+	src: url('../font/PingFang Medium.ttf');
+}
+
+@font-face {
+	font-family: pingfang-light;
+	src: url('../font/PingFang Light.ttf');
+}
+
+@font-face {
+	font-family: pingfang-bold;
+	src: url('../font/PingFang Bold.ttf');
+}
+
+body {
+	background-color: #fafafa ;
+	margin: 0px;
+	padding: 0px;
+	font-family: pingfang-medium;
+	text-align:center;
+}
+
+h1{
+	margin:2px;
+	font-size: 28pt; 
+	font-family: pingfang-light;
+}
+
+#div1{
+	text-align:left;
+	width: 20%;
+	height: 60%;
+	position: absolute;
+	box-sizing: border-box;
+	border:1px solid #A8A8A8;
+	top: 0%;
+	right:0%;
+}
+
+
+p{
+	margin: 0;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	width: 100%;
+}
+
+.sankey_link {
+  fill: none;
+  stroke: #cab485;
+  stroke-opacity: .2;
+}
+.sankey_link:hover {
+  stroke-opacity: .5;
+}
