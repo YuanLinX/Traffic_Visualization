@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mymap.css"/>
+    <link rel="stylesheet" type="text/css" href="css/leaflet.css"/>
+    <link rel="stylesheet" href="dist/style.min.css">
+
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet.polylineDecorator.js"></script>
+    <script src="js/PruneCluster.js"></script>
+    <script src="js/heatmap.js"></script>
+    <script src="js/leaflet-heatmap.js"></script>
+    <script src="js/d3.v4.js"></script>
+    <script src="js/d3-scale-chromatic.v1.min.js"></script>
+    <script src="js/d3-geo-projection.v2.min.js"></script>
+    <script src="js/d3-scale-radial.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="https://d3js.org/d3.v4.js"></script>
+		<script src="https://d3js.org/d3-color.v1.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        <!--<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>-->
+        <!--<script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>-->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>-->
+        <!--<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>-->
+		<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/sankey.js"></script>
+
+    <meta charset="utf-8">
+    <title>Data Visualization</title>
+
+
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #222e3f;
+        }
+
+        #gauge2 {
+            position: absolute;
+            left: 0%;
+            top: 0%;
+            height: 100%;
+            width: 22.5%;
+            overflow: auto;
+            color: #cab485;
+            text-align: center;
+            background-color: #222e3f;
+        }
+
+        #gauge1 {
+            position: absolute;
+            height: 30%;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #cab485;
+            border-radius: 10px;
+            text-align: center;
+            color: #cab485;
+        }
+
+        #linechart {
+            position: absolute;
+            top: 30%;
+            height: 30%;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #cab485;
+            border-radius: 10px;
+            color: #cab485;
+
+        }
+		
+		#sankey {
+            position: absolute;
+			top:60%;
+            height: 39%;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #cab485;
+            border-radius: 10px;
+            text-align: center;
+            color: #ea5475;
+        }
+
+        #mapid {
+            position: absolute;
+            left: 22.5%;
+            top: 6%;
+            height: 82%;
+            width: 50%;
+            z-index: 2;
+            border: 1px solid #cab485;
+            background-color: #222e3f;
+        }
+
+        #trans_btn {
+            position: absolute;
+            left: 22.5%;
+            top: 0;
+            height: 6%;
+            width: 50%;
+            z-index: 20;
+
+        }
+
+        #timeaxis {
+            position: absolute;
+            left: 22.5%;
+            bottom: 0%;
+            height: 12%;
+            width: 50%;
+            color: #cab485;
+            background-color: #222e3f;
+        }
+
+        #analysis {
+            left: 72.5%;
+            position: absolute;
+            height: 100%;
+            width: 27.5%;
+            background-color: #222e3f;
+            color: #cab485;
+            overflow: auto;
+        }
+
+        #heatmap {
+            position: absolute;
+            height: 30%;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #cab485;
+            border-radius: 10px;
+            color: #cab485;
+
+        }
+
+        #heatmap .tick text {
+            fill: #cab485;
+        }
+
+        #co_occ {
+            position: absolute;
+            top: 30%;
+            height: 29%;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #cab485;
+            border-radius: 10px;
+            color: #cab485;
+
+        }
+
+        #co_occ .tick text {
+            fill: #cab485;
+        }
+
+        #stack {
+            position: absolute;
+            top: 59%;
+            height: 40%;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #cab485;
+            border-radius: 10px;
+            color: #cab485;
+        }
+
+        #stack .tick text {
+            fill: #cab485;
+        }
+
+
+        #button_s {
+            position: absolute;
+            right: 27.5%;
+            top: 6%;
+            height: 10%;
+            width: 15%;
+            z-index: 10;
+            text-align: center;
+            border: 0.5px solid #a99175;
+
+            background-color: rgba(51, 51, 51, 0.5);
+            overflow: auto;
+        }
+
+        #button_r {
+            position: absolute;
+            right: 27.5%;
+            top: 6%;
+            height: 6%;
+            width: 12%;
+            z-index: 10;
+            text-align: center;
+            border: 0.5px solid #a99175;
+
+            background-color: rgba(51, 51, 51, 0.5);
+            overflow: auto;
+        }
+
+        #time {
+            margin-top: 5px;
+            margin-left: 0;
+            color: #cab485;
+            font-size: 13px;
+
+        }
+
+        .btn {
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #a99175;
+            border-radius: 5px;
+            font-size: 12px;
+
+            margin-top: 8px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            color: #cab485;
+        }
+
+        .btn2 {
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #a99175;
+            border-radius: 5px;
+            font-size: 13px;
+
+            margin-top: 8px;
+            margin-left: 7px;
+            margin-right: 7px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            padding-left: 7px;
+            padding-right: 7px;
+            color: #cab485;
+        }
+
+        .tooltip {
+            display: flex;
+            flex-direction: column;
+            position: absolute; /*不可缺少*/
+            line-height: 1;
+            padding: 12px;
+            background-color: #322d2d;
+            color: #cab485;
+            border-radius: 2px;
+            text-align: center;
+            opacity: 0;
+            font-size: 10pt;
+        }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #1E90FF;
+            stroke-width: 1;
+            shape-rendering: crispEdges;
+        }
+
+        .Axis path,
+        .Axis line {
+            fill: none;
+            stroke: #cab485;
+            stroke-width: 1;
+            shape-rendering: crispEdges;
+        }
+
+        .bar {
+            fill: #1E90FF;
+            opacity: 0.5;
+        }
+
+        .scrollbar {
+            width: 30px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        div::-webkit-scrollbar { /*滚动条整体样式*/
+            width: 7px; /*高宽分别对应横竖滚动条的尺寸*/
+            height: 4px;
+        }
+
+        div::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            background: #434f61;
+
+        }
+
+        div::-webkit-scrollbar-track { /*滚动条里面轨道*/
+            -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            background: #EDEDED;
+        }
+
+    </style>
+</head>
+<body>
+<div id="speed"></div>
+<div id="mapid"></div>
+<div id="timeaxis"></div>
+<div id="analysis">
+    <div id="heatmap"></div>
+    <div id="co_occ"></div>
+    <div id="stack"></div>
+</div>
+
+<div id="gauge2">
+    <div id="gauge1"></div>
+    <div id="linechart"></div>
+	<div id="sankey"></div>
+</div>
+<div id="trans_btn">
+    <input type="button" class="btn2" value="HeatMap" id="btn_he"></input>
+    <input type="button" class="btn2" value="RealTimeMap" id="btn_rt"></input>
+    <input type="button" class="btn2" value="RoutingMap" id="btn_ro"></input>
+</div>
+<div id="button_s">
+    <input type="button" class="btn" value="Start" id="btn_st"></input>
+    <input type="button" class="btn" value="Stop" id="btn_sp"></input>
+    <input type="button" class="btn" value="Continue" id="btn_co"></input>
+    <p id='time'></p>
+</div>
+<div id="button_r">
+    <input type="button" class="btn" value="Beginning" id="btn_be"></input>
+    <input type="button" class="btn" value="Ending" id="btn_en"></input>
+
+
+</div>
+
+<script src="js/view1.js"></script>
+<script src="js/view2.js"></script>
+<!--<script src="js/view3.js"></script>
+<script src="js/view4.js"></script>-->
+<script src="js/observer.js"></script>
+
+<script src="dist/gauge.min.js"></script>
+<script src="js/example.js"></script>
+</body>
+</html>
