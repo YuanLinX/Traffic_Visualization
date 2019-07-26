@@ -1,1 +1,40 @@
+* {
+  box-sizing: border-box;
 
+
+  }
+.gauge {
+  margin-top: 9px;
+  margin-left:19px;
+  text-align:center;
+
+}
+.gauge g.arc
+{
+  fill:steelblue
+}
+.gauge g.pointer
+{
+  fill:#e85116;
+  stroke:#b64011
+}
+.gauge g.label text{
+  text-anchor:middle;
+  font-size:12px;
+  font-weight:700;
+  fill:#AAA
+}
+.gauge .tickline{
+  stroke:"#AAAAAA";
+  stroke-width:1px
+}
+.number-div{
+  text-align:center;
+  float:bottom
+}
+.number-unit{
+  display:block;
+  font-size:12px}
+.number-value{
+  font-size:30px
+}
